@@ -85,7 +85,7 @@ let quotes = [
 
 let startingIndex = Math.floor(Math.random() * quotes.length);
 
-const colorArr = ['#16a085', '#27ae60', '#2c3e50', '#f39c12', '#e74c3c', '#9b59b6', '#FB6964', '#342224', "#472E32", "#BDBB99", "#77B1A9", "#73A857"];
+const colorArr = ['#9e251c', '#3bbdc2', '#86c704',  '#8ab3c2', '#9ae161', '#20b565', '#d50123', '#edde39', '#499178', '#1c7137', '#0592e3', '#76b69c'];
 
 let QuoteContainer = (props) => {
   return (
@@ -110,16 +110,19 @@ class App extends React.Component {
   }
   newQuote () {
     this.setState({hideBox: true});
-    var randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+    var randomQuote = quotes[Math.floor(Math.random() * (quotes.length))];
     setTimeout(() => {
-      this.setState({
+      this.setState(function(state, props) {
+        return {
         quote: randomQuote.quote,
         author: randomQuote.author,
         quoteSrc: randomQuote.quoteSrc,
         hideBox: false,
-        colour: colorArr[Math.floor(Math.random()*colorArr.length)],
-      });
-    }, 1000);
+        colour: colorArr.filter((elem) => elem !== state.colour)[Math.floor(Math.random()*(colorArr.length-1))],
+      }
+    });
+    console.log(this.state.colour);
+    }, 1000); 
   }
   render () {
     document.getElementsByTagName("body")[0].style.background = this.state.colour;
