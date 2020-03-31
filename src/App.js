@@ -9,22 +9,22 @@ let quotes = [
   {
     quote: 'We still have a long way to go—or as I have written so many times, and said at the end of hundreds of speeches: We are just at the beginning. A glorious future!',
     author: 'Ingvar Kamprad',
-    quoteSrc: '1998, quoted in The IKEA Story by Bertil Torekull.'
+    quoteSrc: '1998, The IKEA Story by Bertil Torekull.'
   },
   {
     quote: 'Nobody can guarantee a company or a concept of eternal life, but no one can accuse me of not having tried to.',
     author: 'Ingvar Kamprad',
-    quoteSrc: "Quoted by Richard Milne in 'IKEA’s fiendishly complex construction,' Financial Times, November 13, 2012."
+    quoteSrc: "'IKEA’s fiendishly complex construction,' Financial Times, November 13, 2012."
   },
   {
     quote: 'Most things still remain to be done!',
     author: 'Ingvar Kamprad',
-    quoteSrc: 'Quoted by Martin Enthed, June 24, 2014.'
+    quoteSrc: 'Martin Enthed, June 24, 2014.'
   },
   {
     quote: 'You can do so much in ten minutes’ time. Ten minutes, once gone, are gone for good. Divide your life into 10-minute units and sacrifice as few of them as possible in meaningless activity.',
     author: 'Ingvar Kamprad',
-    quoteSrc: 'Quoted in the October 2017 issue of Men’s Health magazine, page 41.'
+    quoteSrc: 'October 2017 issue of Men’s Health magazine, page 41.'
   },
   {
     quote: 'Our idea is to serve everybody, including people with little money',
@@ -79,11 +79,22 @@ let quotes = [
   {
     quote: 'We can never do everything, everywhere, all at the same time.',
     author: 'Ingvar Kamprad',
-    quoteSrc: 'unknown'
+    quoteSrc: 'unsourced'
   }
 ];
 
 let startingIndex = Math.floor(Math.random() * quotes.length);
+
+const colorArr = ['#16a085', '#27ae60', '#2c3e50', '#f39c12', '#e74c3c', '#9b59b6', '#FB6964', '#342224', "#472E32", "#BDBB99", "#77B1A9", "#73A857"];
+
+let QuoteContainer = (props) => {
+  return (
+    <div className = {props.classProp} id = "quoteItself">
+          <div id = "text"> "{props.quote}"</div>
+          <div id = "author"> — {props.author}, {props.quoteSrc}</div>
+    </div>
+  );
+}
 
 class App extends React.Component {
   constructor (props) {
@@ -91,27 +102,33 @@ class App extends React.Component {
     this.state = {
       quote: quotes[startingIndex].quote,
       author: quotes[startingIndex].author,
-      quoteSrc: quotes[startingIndex].quoteSrc
+      quoteSrc: quotes[startingIndex].quoteSrc,
+      hideBox: false,
+      colour: colorArr[Math.floor(Math.random()*colorArr.length)],
     }
     this.newQuote = this.newQuote.bind(this);
   }
   newQuote () {
+    this.setState({hideBox: true});
     var randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-    this.setState({
+    setTimeout(() => {
+      this.setState({
         quote: randomQuote.quote,
         author: randomQuote.author,
         quoteSrc: randomQuote.quoteSrc,
+        hideBox: false,
+        colour: colorArr[Math.floor(Math.random()*colorArr.length)],
       });
+    }, 1000);
   }
   render () {
-    return (
-      
-<div id = "quote-box">
-          <div id = "text">{this.state.quote}</div>
-          <div id = "author"> — {this.state.author}, {this.state.quoteSrc}</div>
-          <div id = "button-row"><button id = "new-quote" onClick = {this.newQuote}>New Quote</button></div>
-        </div>
-        
+    document.getElementsByTagName("body")[0].style.background = this.state.colour;
+
+    return (     
+     <div id = "quote-box" style = {{color: this.state.colour}}>
+          <QuoteContainer classProp = {this.state.hideBox?'hideBox':''} quote = {this.state.quote} author = {this.state.author} quoteSrc = {this.state.quoteSrc}/> 
+          <div id = "button-row"><button style = {{background: this.state.colour}} id = "new-quote" onClick = {this.state.hideBox? () => {}: this.newQuote}>New Quote</button></div>
+     </div>       
     );
   }
 }

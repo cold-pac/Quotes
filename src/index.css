@@ -1,5 +1,6 @@
 html, body {
   background: rosybrown;
+  margin: 0;
   height: 100%;
   width: 100%;
   overflow: hidden;
@@ -35,3 +36,25 @@ main {
   justify-content: flex-end;
   margin: 1vw;
 }
+button {
+  cursor: pointer;
+  border: none;
+  color: white;
+  font-size: 0.5em;
+  padding: 1vh;
+}
+#quoteItself {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 1s, opacity 0.5s linear;
+}
+#quoteItself.hideBox {
+  visibility: hidden;
+  opacity: 0;
+}
+@media(orientation: portrait) {
+  main {
+    width: 80%;
+  }
+}
+

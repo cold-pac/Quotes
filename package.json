@@ -1,12 +1,15 @@
 {
+  "homepage": "https://cold-pac.github.io/Quotes",
   "name": "quotes",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.28",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "classnames": "^2.2.6",
+    "gh-pages": "^2.2.0",
     "react": "^16.13.1",
     "react-addons-css-transition-group": "^15.6.2",
     "react-animate-height": "^2.0.20",
@@ -16,6 +19,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
