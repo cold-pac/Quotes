@@ -1,4 +1,7 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faQuoteLeft, faQuoteRight } from '@fortawesome/free-solid-svg-icons'
+import { faTwitter, faTwitterSquare } from '@fortawesome/free-brands-svg-icons'
 
 let quotes = [
   {
@@ -90,7 +93,7 @@ const colorArr = ['#9e251c', '#3bbdc2', '#86c704',  '#8ab3c2', '#9ae161', '#20b5
 let QuoteContainer = (props) => {
   return (
     <div className = {props.classProp} id = "quoteItself">
-          <div id = "text"> "{props.quote}"</div>
+          <div id = "text"><FontAwesomeIcon icon = {faQuoteLeft}/> {props.quote}</div>
           <div id = "author"> — {props.author}, {props.quoteSrc}</div>
     </div>
   );
@@ -126,11 +129,10 @@ class App extends React.Component {
   }
   render () {
     document.getElementsByTagName("body")[0].style.background = this.state.colour;
-
     return (     
      <div id = "quote-box" style = {{color: this.state.colour}}>
-          <QuoteContainer classProp = {this.state.hideBox?'hideBox':''} quote = {this.state.quote} author = {this.state.author} quoteSrc = {this.state.quoteSrc}/> 
-          <div id = "button-row"><button style = {{background: this.state.colour}} id = "new-quote" onClick = {this.state.hideBox? () => {}: this.newQuote}>New Quote</button></div>
+          <QuoteContainer hide = {this.state.hideBox} classProp = {this.state.hideBox?'hideBox':''} quote = {this.state.quote} author = {this.state.author} quoteSrc = {this.state.quoteSrc}/> 
+          <div id = "button-row"><a alt = "Share on Twitter" id = "tweet-quote" href = {"https://twitter.com/intent/tweet?text='" + this.state.quote + "'&via=https://cold-pac.github.io/Quotes/"} target="_blank" style = {{color: this.state.colour}}><FontAwesomeIcon icon={ faTwitter } /></a><button style = {{background: this.state.colour}} id = "new-quote" onClick = {this.state.hideBox? () => {}: this.newQuote}>New Quote</button></div>
      </div>       
     );
   }

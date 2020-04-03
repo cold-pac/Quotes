@@ -35,8 +35,8 @@ main {
 #button-row {
   display: flex;
   flex-direction: row;
-  width: 100%;
-  justify-content: flex-end;
+  width: 80%;
+  justify-content: space-between;
   margin: 1vw;
 }
 button {
